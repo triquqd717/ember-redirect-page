@@ -1,5 +1,6 @@
 const ROBLOX_DEEP_LINK = "roblox://placeId=126884695634066&launchData=%7B%22roomId%22%3A%202%7D";
 const ROBLOX_WEB_FALLBACK_LINK = "https://www.roblox.com/games/126884695634066/";
+const BOT_INVITE_LINK = "https://discord.com/oauth2/authorize?client_id=1364847027674021938&permissions=412854242512&scope=bot+applications.commands";
 
 document.addEventListener('DOMContentLoaded', () => {
     const countdownElement = document.getElementById('countdown');
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelBtn = document.getElementById('cancel-btn');
     const launchAgainBtn = document.getElementById('launch-again-btn');
     const goToWebsiteBtn = document.getElementById('go-to-website-btn'); 
+    const addBotHeaderBtn = document.getElementById('add-bot-header-btn');
 
     let timeLeft = 5;
     let countdownInterval = null;
@@ -46,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         redirectMessageElement.textContent = 'Taking you to the Roblox website.';
         window.location.href = ROBLOX_WEB_FALLBACK_LINK;
     };
+    
+    const addBotToDiscord = () => {
+        window.open(BOT_INVITE_LINK, '_blank');
+    };
 
     const startCountdown = () => {
         countdownInterval = setInterval(() => {
@@ -61,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelBtn.addEventListener('click', cancelRedirect);
     launchAgainBtn.addEventListener('click', launchGame); 
     goToWebsiteBtn.addEventListener('click', goToWebsite);
+    addBotHeaderBtn.addEventListener('click', addBotToDiscord);
 
     startCountdown();
 });
