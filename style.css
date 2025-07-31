@@ -1,14 +1,21 @@
 :root {
-    --ember-orange: #E55B13;
-    --dark-background: #1e2124;
-    --text-primary: #ffffff;
-    --text-secondary: #b9bbbe;
-    --button-secondary-bg: #40444b;
+    --ember-orange-bright: #FF4800;
+    --ember-orange-deep: #D43D00;
+    --ember-glow: rgba(255, 72, 0, 0.4);
+    --dark-bg: #121212;
+    --glass-bg: rgba(26, 26, 29, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #FFFFFF;
+    --text-secondary: #A0A0A0;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--dark-background);
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
     color: var(--text-primary);
     display: flex;
     justify-content: center;
@@ -16,54 +23,78 @@ body {
     min-height: 100vh;
     margin: 0;
     text-align: center;
+    overflow: hidden;
+}
+
+.background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(240deg, var(--ember-orange-deep), #3a1c00, var(--dark-bg));
+    background-size: 200% 200%;
+    animation: moveGradient 15s ease-in-out infinite;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .redirect-container {
-    background-color: #282b30;
+    background: var(--glass-bg);
     padding: 2.5rem 3rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    max-width: 400px;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    max-width: 420px;
     width: 90%;
-    transform: translateY(-20px);
     opacity: 0;
-    animation: fadeIn 0.5s ease-out forwards;
+    transform: scale(0.95);
+    animation: fadeIn 0.6s 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 @keyframes fadeIn {
     to {
-        transform: translateY(0);
         opacity: 1;
+        transform: scale(1);
     }
 }
 
 .logo {
     font-size: 2.5rem;
-    font-weight: 600;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    background: var(--ember-orange);
-    color: var(--text-primary);
+    font-weight: 700;
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(45deg, var(--ember-orange-bright), var(--ember-orange-deep));
     border-radius: 50%;
-    margin: 0 auto 1rem;
+    color: var(--text-primary);
+    box-shadow: 0 0 20px var(--ember-glow);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1.75rem;
+    margin: 0 0 0.75rem 0;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 
 p {
     color: var(--text-secondary);
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 2rem;
 }
 
 #countdown {
-    color: var(--ember-orange);
+    color: var(--ember-orange-bright);
     font-weight: 600;
 }
 
@@ -75,34 +106,38 @@ p {
 
 .btn {
     border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
+    padding: 14px 28px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
 }
 
 .btn:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn.primary {
-    background-color: var(--ember-orange);
+    background: linear-gradient(45deg, var(--ember-orange-bright), var(--ember-orange-deep));
     color: var(--text-primary);
+    box-shadow: 0 4px 15px var(--ember-glow);
 }
 
 .btn.primary:hover {
-    background-color: #f66a22;
+    box-shadow: 0 6px 25px var(--ember-glow);
 }
 
 .btn.secondary {
-    background-color: var(--button-secondary-bg);
-    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
 }
 
 .btn.secondary:hover {
-    background-color: #52575e;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
 }
 
 .hidden {
