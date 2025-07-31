@@ -8,30 +8,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const launchBtn = document.getElementById('launch-btn');
     const cancelBtn = document.getElementById('cancel-btn');
     const launchAgainBtn = document.getElementById('launch-again-btn');
+    const goToWebsiteBtn = document.getElementById('go-to-website-btn'); 
 
     let timeLeft = 5;
     let countdownInterval = null;
 
     const launchGame = () => {
         clearInterval(countdownInterval);
-        mainHeadingElement.textContent = 'Launching...';
-        redirectMessageElement.innerHTML = `Opening Roblox now. If nothing happens, you may need to install Roblox or <a href="${ROBLOX_WEB_FALLBACK_LINK}">join via the website</a>.`;
+        
+        mainHeadingElement.textContent = 'Launch Initiated';
+        redirectMessageElement.innerHTML = `If the game doesn't open, you can try again or visit the official website.`;
+        
         launchBtn.classList.add('hidden');
         cancelBtn.classList.add('hidden');
-        launchAgainBtn.classList.add('hidden');
+
+        launchAgainBtn.classList.remove('hidden');
+        goToWebsiteBtn.classList.remove('hidden');
+
         window.location.href = ROBLOX_DEEP_LINK;
-        setTimeout(() => {
-            window.location.href = ROBLOX_WEB_FALLBACK_LINK;
-        }, 3000);
+
     };
 
     const cancelRedirect = () => {
         clearInterval(countdownInterval);
         mainHeadingElement.textContent = 'Redirect Canceled';
-        redirectMessageElement.textContent = 'You can try launching the game again if you wish.';
+        redirectMessageElement.textContent = 'You can launch the game or visit the website directly.';
+        
         launchBtn.classList.add('hidden');
         cancelBtn.classList.add('hidden');
+        
         launchAgainBtn.classList.remove('hidden');
+        goToWebsiteBtn.classList.remove('hidden');
+    };
+
+    const goToWebsite = () => {
+        mainHeadingElement.textContent = 'Redirecting...';
+        redirectMessageElement.textContent = 'Taking you to the Roblox website.';
+        window.location.href = ROBLOX_WEB_FALLBACK_LINK;
     };
 
     const startCountdown = () => {
@@ -46,7 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     launchBtn.addEventListener('click', launchGame);
     cancelBtn.addEventListener('click', cancelRedirect);
-    launchAgainBtn.addEventListener('click', launchGame);
+    launchAgainBtn.addEventListener('click', launchGame); 
+    goToWebsiteBtn.addEventListener('click', goToWebsite);
 
     startCountdown();
 });
