@@ -1,4 +1,4 @@
-const ROBLOX_DEEP_LINK = "roblox://placeId=126884695634066&launchData=%7B%22roomId%22%3A%202%7D";
+const ROBLOX_DEEP_LINK = "roblox://experiences/start?placeId=126884695634066";
 const ROBLOX_WEB_FALLBACK_LINK = "https://www.roblox.com/games/126884695634066/";
 const BOT_INVITE_LINK = "https://discord.com/oauth2/authorize?client_id=1364847027674021938&permissions=412854242512&scope=bot+applications.commands";
 
